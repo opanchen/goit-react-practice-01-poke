@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "/goit-react-practice-01-poke/static/css/main.7acaea2f.css",
-    "main.js": "/goit-react-practice-01-poke/static/js/main.07d3183d.js",
+    "main.css": "/goit-react-practice-01-poke/static/css/main.8e149327.css",
+    "main.js": "/goit-react-practice-01-poke/static/js/main.1993dbb9.js",
+    "static/media/sad_ash.jpeg": "/goit-react-practice-01-poke/static/media/sad_ash.be2ea61c9686a8635509.jpeg",
+    "static/media/pokemon_shadow.jpeg": "/goit-react-practice-01-poke/static/media/pokemon_shadow.52184572fc73ce1c359f.jpeg",
     "index.html": "/goit-react-practice-01-poke/index.html",
-    "main.7acaea2f.css.map": "/goit-react-practice-01-poke/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/goit-react-practice-01-poke/static/js/main.07d3183d.js.map"
+    "main.8e149327.css.map": "/goit-react-practice-01-poke/static/css/main.8e149327.css.map",
+    "main.1993dbb9.js.map": "/goit-react-practice-01-poke/static/js/main.1993dbb9.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.8e149327.css",
+    "static/js/main.1993dbb9.js"
   ]
 }
