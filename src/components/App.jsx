@@ -1,16 +1,32 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
+import { Component } from "react"
+import { PokemonForm } from "./PokemonForm/PokemonForm"
+import { PokemonInfo } from "./PokemonInfo/PokemonInfo";
+
+export class App extends Component {
+
+  state = {
+    pokemonName: '',
+  }
+
+  handleFormSubmit = (pokemonName) => {
+    console.log(pokemonName);
+    this.setState({pokemonName});
+  }
+
+  render() {
+
+    return (
+      <>
+      <PokemonForm
+      onSubmit={this.handleFormSubmit}
+      />
+
+      <PokemonInfo
+      pokemonName={this.state.pokemonName}
+      />
+      </>
+    )
+  }
+
+
 };

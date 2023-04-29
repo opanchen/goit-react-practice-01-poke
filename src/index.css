@@ -13,3 +13,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* TODO: --------------- */
+
+.icon-spin {
+  margin-right: 16px;
+  animation: icon-spin 2000ms infinite linear;
+}
+
+/* @-webkit-keyframes icon-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+} */
+
+@keyframes icon-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
