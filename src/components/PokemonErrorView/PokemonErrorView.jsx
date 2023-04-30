@@ -1,4 +1,5 @@
 import errorImage from 'images/sad_ash.jpeg';
+import PropTypes from "prop-types";
 
 export const PokemonErrorView = ({message}) => {
     return (
@@ -7,4 +8,8 @@ export const PokemonErrorView = ({message}) => {
             <p>{message}</p>
         </div>
     )
+}
+
+PokemonErrorView.propTypes = {
+    message: PropTypes.string.isRequired,
 }

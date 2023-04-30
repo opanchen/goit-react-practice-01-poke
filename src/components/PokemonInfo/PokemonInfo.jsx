@@ -1,62 +1,63 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { pokemonAPI } from "services/pokemon-api";
 import { PokemonErrorView } from "components/PokemonErrorView/PokemonErrorView";
 import { PokemonDataView } from "components/PokemonDataView/PokemonDataView";
 import { PokemonPendingView } from "components/PokemonPendingView/PokemonPendingView";
+import PropTypes from "prop-types";
 
-// 'idle'
-// 'pending'
-// 'resolved'
-// 'rejected'
+const Status = {
+    IDLE: 'idle',
+    PENDING: 'pending',
+    RESOLVED: 'resolved',
+    REJECTED: 'rejected',
+}
 
 
-export class PokemonInfo extends Component {
+export const PokemonInfo = ({pokemonName}) => {
 
-    state = {
-        pokemon: null,
-        error: null,
-        status: 'idle',
-    }
+    const [pokemon, setPokemon] = useState(null);
+    const [error, setError] = useState(null);
+    const [status, setStatus] = useState(Status.IDLE)
+    
+    useEffect(() => {
+        if(!pokemonName) return;
+        
+        setStatus(Status.PENDING)
 
-    componentDidUpdate(prevProps, _) {
+        setTimeout(() => {
+                pokemonAPI
+                .fetchPokemon(pokemonName)
+                .then(pokemon => {
+                    console.log(pokemon)
+                    setPokemon(pokemon);
+                    setStatus(Status.RESOLVED)
+                })
+                .catch(error => {
+                    setError(error);
+                    setStatus(Status.REJECTED);
+                })
+        }, 2000);
+    }, [pokemonName])
 
-        if (prevProps.pokemonName !== this.props.pokemonName) {
-
-            this.setState({status: 'pending'})
-
-            setTimeout(() => {
-                    pokemonAPI
-                    .fetchPokemon(this.props.pokemonName)
-                    .then(pokemon => {
-                        console.log(pokemon)
-                        return this.setState({pokemon, status: 'resolved'})})
-                    .catch(error => {
-                        console.log(error)
-                        this.setState({error, status: 'rejected'})
-                    })
-        }, 2000)}
-
-    }
     
 
-    render() {
-        const {pokemon, error, status} = this.state;
-        const {pokemonName} = this.props;
-
-        if (status === 'idle') {
-            return <p>Enter pokemon name.</p>
-        }
-
-        if (status === 'pending') {
-           return <PokemonPendingView pokemonName={pokemonName} />
-        }
-
-        if (status === 'resolved') {
-            return <PokemonDataView pokemon={pokemon}/>
-        }
-
-        if (status === 'rejected') {
-           return <PokemonErrorView message={error.message}/>
-        }
+    if (status === Status.IDLE) {
+        return <p>Enter pokemon name.</p>
     }
+
+    if (status === Status.PENDING) {
+        return <PokemonPendingView pokemonName={pokemonName} />
+    }
+
+    if (status === Status.RESOLVED) {
+        return <PokemonDataView pokemon={pokemon}/>
+    }
+
+    if (status === Status.REJECTED) {
+        return <PokemonErrorView message={error.message}/>
+    }
+}
+
+PokemonInfo.propTypes = {
+    pokemonName: PropTypes.string.isRequired,
 }

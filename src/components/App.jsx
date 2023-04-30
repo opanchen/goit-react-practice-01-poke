@@ -1,32 +1,16 @@
-import { Component } from "react"
+import { useState } from "react"
 import { PokemonForm } from "./PokemonForm/PokemonForm"
 import { PokemonInfo } from "./PokemonInfo/PokemonInfo";
 
-export class App extends Component {
+export const App = () => {
 
-  state = {
-    pokemonName: '',
-  }
+  const [pokemonName, setPokemonName] = useState('');
 
-  handleFormSubmit = (pokemonName) => {
-    console.log(pokemonName);
-    this.setState({pokemonName});
-  }
-
-  render() {
-
-    return (
-      <>
-      <PokemonForm
-      onSubmit={this.handleFormSubmit}
-      />
-
-      <PokemonInfo
-      pokemonName={this.state.pokemonName}
-      />
-      </>
-    )
-  }
-
-
+  return (
+    <>
+    <PokemonForm onSubmit={setPokemonName} />
+    <PokemonInfo pokemonName={pokemonName} />
+    </>
+  )
 };
+

@@ -1,48 +1,46 @@
-import { Component } from "react";
-import {GoSearch} from "react-icons/go";
+import { useState } from "react";
+import { GoSearch } from "react-icons/go";
+import PropTypes from "prop-types";
 
-export class PokemonForm extends Component {
+export const PokemonForm = ({onSubmit}) => {
 
-    state = {
-        pokemonName: '',
-    }
+    const [pokemonName, setPokemonName] = useState('')
 
-    handleNameChange = (e) => {
-        this.setState({pokemonName: e.currentTarget.value.toLowerCase()});
+    const handleNameChange = (e) => {
+        setPokemonName(e.currentTarget.value.toLowerCase());
     };
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (this.state.pokemonName.trim() === '') {
+        if (pokemonName.trim() === '') {
             alert('Enter pokemon name.')
             return
         }
 
-        this.props.onSubmit(this.state.pokemonName);
-        this.setState({pokemonName: ''})
+        onSubmit(pokemonName);
+        setPokemonName('');
     }
 
-    render() {
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="pokemonName">Pokemon name</label>
+            <input 
+            type="text" 
+            id="pokemonName" 
+            name="pokemonName" 
+            value={pokemonName}
+            onChange={handleNameChange}
+            />
+            <button type="submit">
+                <GoSearch style={{ marginRight: 8}} />
+                Search
+            </button>
+        </form>
+    )
+}
 
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label htmlFor="pokemonName">Pokemon name</label>
-                <input 
-                type="text" 
-                id="pokemonName" 
-                name="pokemonName" 
-                value={this.state.pokemonName}
-                onChange={this.handleNameChange}
-                />
-                <button type="submit">
-                    <GoSearch style={{ marginRight: 8}} />
-                    Search
-                </button>
-            </form>
-        )
-
-
-    }
-
+PokemonForm.propTypes = {
+onSubmit: PropTypes.func.isRequired,
 }

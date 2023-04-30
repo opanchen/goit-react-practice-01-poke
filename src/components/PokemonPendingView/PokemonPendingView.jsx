@@ -1,6 +1,7 @@
 import {ImSpinner9} from "react-icons/im";
 import pendingImage from "images/pokemon_shadow.jpeg";
 import { PokemonDataView } from "components/PokemonDataView/PokemonDataView";
+import PropTypes from "prop-types";
 
 export const PokemonPendingView = ({pokemonName}) => {
 
@@ -18,7 +19,7 @@ export const PokemonPendingView = ({pokemonName}) => {
 
     return (
         <div role="alert">
-            <div>
+            <div style={{display: 'flex',alignItems: 'center', gap: 8}}>
                 <ImSpinner9 size={32} className="icon-spin"/>
                 <p>Loading...</p>
             </div>
@@ -26,14 +27,6 @@ export const PokemonPendingView = ({pokemonName}) => {
         </div>
     )}
 
-    // <div role="alert">
-    // <img src={sprites.other['official-artwork'].front_default} alt={name} width={200}/>
-    // <h2>{name}</h2>
-    // <ul>
-    //     { stats.map(entry => (
-    //         <li key={entry.stat.name}>
-    //             {entry.stat.name}: {entry.base_stat}
-    //         </li>
-    //     )) }
-    // </ul>
-    // </div>
+    PokemonPendingView.propTypes = {
+        pokemonName: PropTypes.string.isRequired,
+    }
